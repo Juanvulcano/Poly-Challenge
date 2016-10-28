@@ -44,9 +44,8 @@ def build(url, data, headers):
                 return(1)
     #Search for Category Array, get the initial data
     length = len(root.findall('{urn:ebay:apis:eBLBaseComponents}CategoryArray'))
-    length2 = len(root.findall('{urn:ebay:apis:eBLBaseComponents}Category'))
     Categories = []
-    if length+length2 > 0:
+    if length > 0:
         version = ( root[6].text, )
         for Category in root[4]:
             category = []
@@ -57,6 +56,7 @@ def build(url, data, headers):
             a = Category.find("{urn:ebay:apis:eBLBaseComponents}BestOfferEnabled")
             if hasattr(a, 'text'):
                 offer = "true"
+            print(offer)
             parentid = Category.find("{urn:ebay:apis:eBLBaseComponents}CategoryParentID").text
             category.append(name)
             category.append(cid)
