@@ -41,7 +41,7 @@ def build(url, data, headers):
             row = cur.fetchone()
             if version == row:
                 print("Database is up to date!")
-                return(1)
+                return()
     #Search for Category Array, get the initial data
     length = len(root.findall('{urn:ebay:apis:eBLBaseComponents}CategoryArray'))
     Categories = []
@@ -56,7 +56,6 @@ def build(url, data, headers):
             a = Category.find("{urn:ebay:apis:eBLBaseComponents}BestOfferEnabled")
             if hasattr(a, 'text'):
                 offer = "true"
-            print(offer)
             parentid = Category.find("{urn:ebay:apis:eBLBaseComponents}CategoryParentID").text
             category.append(name)
             category.append(cid)
@@ -84,7 +83,7 @@ def build(url, data, headers):
             print("New tables were fetched!")
         con.close()
         print("Closing database")
-        return("Happy ending")
+        return()
 
     xml = """
 <?xml version="1.0" encoding="utf-8"?>
